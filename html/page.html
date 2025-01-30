@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Balance Manager</title>
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Jaldi:wght@400;700&family=Poiret+One&display=swap" rel="stylesheet">
+        <script src="/js/main.js" defer></script>
+    </head>
+    <body>
+        <div class="container">
+            <nav>
+                <ul class="nav-bar">
+                    <li><a href="/">Overview</a></li>
+                    <li><a href="/">History</a></li>
+                    <li><a href="/">Account</a></li>
+                </ul>
+            </nav>
+            <div class="page-content">
+                <header>
+                    <h1>Overview</h1>
+                </header>
+                <main>
+                    <section>
+                        <article id="budget-planner">
+                            <div class="budget">
+                                <h2 id="planner-header">Budget Planner</h2>
+                                <form id="planner-form">
+                                    <label for="amount">Amount</label>
+                                    <input type="number" step="0.01" id="amount" name="amount" required>
+                                    <label for="date">Date</label>
+                                    <input type="date" id="date" name="date">
+                                    <input type="submit" value="Submit" id="submit">
+                                </form>
+                            </div>
+                        </article>
+                        <article id="budget-overview">
+                            <div class="overview">
+                                <h2 id="overview-header">Balance</h2>
+                                <div class="field">
+                                    <p id="balance">0</p>
+                                </div>
+                                <p id="total-spent"></p>
+                            </div>
+                        </article>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>

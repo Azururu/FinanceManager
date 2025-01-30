@@ -1,0 +1,23 @@
+html {
+    background: linear-gradient(-135deg, #FFF7D1, #FFECC8, #FFD09B, #FFB0B0);
+    height: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    border-bottom: solid black 2px;
+    width: 40%;
+    margin: auto;
+    padding-top: 2rem;
+}
+
+h1 {
+    color: black;
+    text-align: center;
+    font-size: 2rem;
+    font-family: "Poiret One", sans-serif;
+    text-shadow: 0 0 2px black;
+}
