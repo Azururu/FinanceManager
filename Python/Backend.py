@@ -64,46 +64,55 @@ def login(username, password):
 # Endpoint for getting current balance
 @app.route('/balance')
 def available():
-    sql_balance = "SELECT current FROM balance ORDER BY ID DESC LIMIT 1;"
     cursor = connection.cursor()
-    cursor.execute(sql_balance)
-    result = cursor.fetchall()
-    return result
+    try:
+        sql_balance = "SELECT current FROM balance ORDER BY ID DESC LIMIT 1;"
+        cursor.execute(sql_balance)
+        result = cursor.fetchall()
+        return result
+    finally:
+        cursor.close()
 
 
 # Endpoint for getting the amount that have been spent
 @app.route('/spent')
 def spent():
-    sql_budget = "SELECT current FROM balance WHERE ID = '1';"
     cursor = connection.cursor()
-    cursor.execute(sql_budget)
-    budget = cursor.fetchall()
+    try:
+        sql_budget = "SELECT current FROM balance WHERE ID = '1';"
+        cursor.execute(sql_budget)
+        budget = cursor.fetchall()
 
-    sql_current_balance = "SELECT current FROM balance ORDER BY ID DESC LIMIT 1;"
-    cursor.execute(sql_current_balance)
-    current_balance = cursor.fetchall()
+        sql_current_balance = "SELECT current FROM balance ORDER BY ID DESC LIMIT 1;"
+        cursor.execute(sql_current_balance)
+        current_balance = cursor.fetchall()
 
-    total = float(budget[0][0])
-    current = float(current_balance[0][0])
+        total = float(budget[0][0])
+        current = float(current_balance[0][0])
 
-    spent_since = current - total
-    return str(spent_since)
+        spent_since = current - total
+        return str(spent_since)
+    finally:
+        cursor.close()
 
 
 # Endpoint for getting data for the budget start date
 @app.route('/start_date')
 def date():
-    sql_start_date = "SELECT date FROM balance WHERE ID = '1';"
     cursor = connection.cursor()
-    cursor.execute(sql_start_date)
-    start_date = cursor.fetchone()
+    try:
+        sql_start_date = "SELECT date FROM balance WHERE ID = '1';"
+        cursor.execute(sql_start_date)
+        start_date = cursor.fetchone()
 
-    if start_date and start_date[0]:
-        formatted_date = start_date[0].strftime("%m/%d/%Y")
-    else:
-        formatted_date = None
+        if start_date and start_date[0]:
+            formatted_date = start_date[0].strftime("%m/%d/%Y")
+        else:
+            formatted_date = None
 
-    return jsonify({"start_date": formatted_date})
+        return jsonify({"start_date": formatted_date})
+    finally:
+        cursor.close()
 
 if __name__ == '__main__':
     app.run(use_reloader=True, host='localhost', port=3000)
