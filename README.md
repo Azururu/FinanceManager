@@ -8,7 +8,7 @@ JavaScript is used to gather user input values and sending them through flask se
 It is also used to return data through flask and edit/create HTML content. 
 ## Frontend
 ### CSS
-Styling for the webpage.
+Unique styling for the webpage and created animations using keyframes.
 ### HTML
-Webpage structure.
+Basic webpage structure. 
 
