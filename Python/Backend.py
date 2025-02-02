@@ -24,16 +24,36 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Endpoint for storing the budget and date to the database
 @app.route('/budget/<budget_value>/<date>')
-def update(budget_value, date):
+def submit(budget_value, date):
     cursor = connection.cursor()
     try:
         sql_insert = "INSERT INTO balance (current, date) VALUES (%s, %s);"
         cursor.execute(sql_insert, (budget_value, date))
         result = cursor.fetchall()
         if result:
-            return {"valid": "successful"}
+            return {"result": "successful"}
         else:
-            return {"valid": "failed"}
+            return {"result": "failed"}
+    finally:
+        cursor.close()
+
+# Endpoint for subtracting an amount from the available amount
+@app.route('/update/<update_value>/<date>')
+def update(update_value, date):
+    cursor = connection.cursor()
+    try:
+        sql_search = "SELECT current FROM balance ORDER BY ID DESC LIMIT 1;"
+        cursor.execute(sql_search)
+        search_result = cursor.fetchall()
+        subtraction = float(search_result[0][0]) - float(update_value)
+        str_subtraction = str(subtraction)
+        sql_insert_subtraction = "INSERT INTO balance (current, date) VALUES (%s, %s);"
+        cursor.execute(sql_insert_subtraction, (str_subtraction, date))
+        update_result = cursor.fetchall()
+        if update_result:
+            return {"result": "successful"}
+        else:
+            return {"result": "failed"}
     finally:
         cursor.close()
 
@@ -52,9 +72,9 @@ def login(username, password):
             cursor.execute(sql_full_auth, (username, password))
             check = cursor.fetchall()
             if check:
-                return {"valid": "successful"}
+                return {"result": "successful"}
             else:
-                return {"invalid": "failed"}
+                return {"result": "failed"}
         if not result:
             cursor.execute(sql_insert, (username, password))
             return {"valid": "created"}
@@ -69,10 +89,24 @@ def available():
         sql_balance = "SELECT current FROM balance ORDER BY ID DESC LIMIT 1;"
         cursor.execute(sql_balance)
         result = cursor.fetchall()
-        return result
+        float_result = float(result[0][0])
+        return f"{float_result:.2f}"
     finally:
         cursor.close()
 
+@app.route('/history_check')
+def check():
+    cursor = connection.cursor()
+    try:
+        sql_check = "SELECT * FROM balance WHERE ID = '1';"
+        cursor.execute(sql_check)
+        check_result = cursor.fetchall()
+        if check_result:
+            return {"result": "valid"}
+        else:
+            return {"result": "invalid"}
+    finally:
+        cursor.close()
 
 # Endpoint for getting the amount that have been spent
 @app.route('/spent')
@@ -91,7 +125,7 @@ def spent():
         current = float(current_balance[0][0])
 
         spent_since = current - total
-        return str(spent_since)
+        return f"{spent_since:.2f}"
     finally:
         cursor.close()
 

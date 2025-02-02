@@ -1,6 +1,7 @@
 html {
     background: linear-gradient(-135deg, #FFF7D1, #FFECC8, #FFD09B, #FFB0B0);
     height: 100%;
+    background-size: cover;
 }
 
 body {
@@ -70,47 +71,51 @@ li:hover {
     }
 }
 
-section {
+.desktop-container {
+    width: 100%;
     display: flex;
     background-color: #a67d52;
     border: solid black 1px;
     border-radius: 8px;
     margin-top: 2rem;
     box-shadow: 0 0 3px black;
+    padding-bottom: 30rem;
 }
 
-.budget {
+.window {
     margin-left: 1rem;
     margin-bottom: 1rem;
 }
 
-#budget-planner {
+#planner-div,
+#update-div{
+    position: absolute;
     border: solid black 2px;
     border-radius: 1rem;
-    margin-top: 1rem;
-    margin-left: 1rem;
-    margin-bottom: 1rem;
-    width: 30%;
+    width: 20%;
     background-color: #FFF7D1;
     box-shadow: 0 0 4px black;
-    scale: 0.975;
-    transition: 0.3s;
-}
-
-#budget-planner:hover {
-    scale: 1;
+    z-index: 1
 }
 
 #planner-header {
     font-family: "Poiret One", sans-serif;
     border-bottom: solid black 2px;
-    width: 70%;
+    width: 50%;
+    line-height: 2rem;
+}
+
+#bHeader {
+    font-family: "Poiret One", sans-serif;
+    border-bottom: solid black 2px;
+    width: 60%;
     line-height: 2rem;
 }
 
 label, input {
     display: block;
     margin-bottom: 8px;
+    z-index: 2;
 }
 
 label {
@@ -119,7 +124,9 @@ label {
     font-size: 1rem;
 }
 
-#amount {
+
+#amount,
+#budget-amount {
     background-color: #3c444d;
     border-radius: 6px;
     outline: none;
@@ -132,12 +139,14 @@ label {
     transition: 0.3s;
 }
 
-#amount:focus {
+#amount:focus,
+#budget-amount:focus {
     border-color: white;
     box-shadow: 0 0 4px black;
 }
 
-#date {
+#date,
+#start-date {
     background-color: #3c444d;
     color: white;
     border: solid black 2px;
@@ -147,6 +156,7 @@ label {
     height: 1.5rem;
 }
 
+#update-button,
 #submit {
     width: 40%;
     height: 2rem;
@@ -155,11 +165,12 @@ label {
     background-color: #FFD09B;
     color: black;
     box-shadow: 0 0 2px black;
-    transition: 0.3s;
+    transition: 0.2s;
     text-shadow: 0 0 1px black;
     font-family: "Barlow", sans-serif;
 }
 
+#update-button:hover,
 #submit:hover {
     background-color: #373b40;
     color: white;
@@ -167,34 +178,20 @@ label {
     text-shadow: 0 0 2px white;
 }
 
-#budget-overview {
+#balance-div {
+    position: absolute;
     border: solid black 2px;
     background-color: #FFF7D1;
-    margin-top: 1rem;
-    margin-left: 1rem;
-    margin-bottom: 1rem;
     border-radius: 1rem;
-    height: 50%;
     box-shadow: 0 0 4px black;
-    width: 25%;
-    scale: 0.975;
-    transition: 0.3s;
-}
-
-#budget-overview:hover {
-    scale: 1;
+    width: 15%;
 }
 
 #overview-header {
     font-family: "Poiret One", sans-serif;
     border-bottom: solid black 2px;
-    width: 70%;
+    width: 60%;
     line-height: 2rem;
-}
-
-.overview {
-    margin-left: 1rem;
-    margin-bottom: 1rem;
 }
 
 .field {

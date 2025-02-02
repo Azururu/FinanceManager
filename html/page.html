@@ -23,28 +23,46 @@
                     <h1>Overview</h1>
                 </header>
                 <main>
-                    <section>
-                        <article id="budget-planner">
-                            <div class="budget">
-                                <h2 id="planner-header">Budget Planner</h2>
-                                <form id="planner-form">
-                                    <label for="amount">Amount</label>
-                                    <input type="number" step="0.01" id="amount" name="amount" required>
-                                    <label for="date">Date</label>
-                                    <input type="date" id="date" name="date">
-                                    <input type="submit" value="Submit" id="submit">
-                                </form>
-                            </div>
-                        </article>
-                        <article id="budget-overview">
-                            <div class="overview">
-                                <h2 id="overview-header">Balance</h2>
-                                <div class="field">
-                                    <p id="balance">0</p>
+                    <section class="desktop-container">
+                        <div id="planner-div">
+                            <article class="budget-planner">
+                                <div class="window">
+                                    <h2 id="bHeader">Set budget</h2>
+                                    <form id="budget-form">
+                                        <label for="budget-amount">Amount</label>
+                                        <input type="number" step="0.01" id="budget-amount" name="budget-amount" required>
+                                        <label for="start-date">Date</label>
+                                        <input type="date" id="start-date" name="date">
+                                        <input type="submit" value="Submit" id="submit">
+                                    </form>
                                 </div>
-                                <p id="total-spent"></p>
-                            </div>
-                        </article>
+                            </article>
+                        </div>
+                        <div id="update-div">
+                            <article class="budget-planner">
+                                <div class="window">
+                                    <h2 id="planner-header">Update</h2>
+                                    <form id="planner-form">
+                                        <label for="amount">Amount</label>
+                                        <input type="number" step="0.01" id="amount" name="amount" required>
+                                        <label for="date">Date</label>
+                                        <input type="date" id="date" name="date">
+                                        <input type="submit" value="Update" id="update-button">
+                                    </form>
+                                </div>
+                            </article>
+                        </div>
+                        <div id="balance-div">
+                            <article id="budget-overview">
+                                <div class="window">
+                                    <h2 id="overview-header">Balance</h2>
+                                    <div class="field">
+                                        <p id="balance">0</p>
+                                    </div>
+                                    <p id="total-spent"></p>
+                                </div>
+                            </article>
+                        </div>
                     </section>
                 </main>
             </div>
