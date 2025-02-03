@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Jaldi:wght@400;700&family=Poiret+One&display=swap" rel="stylesheet">
     <script src="/js/login.js" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=close" />
 </head>
 <body>
     <div class="login-container">
@@ -16,13 +17,29 @@
         </header>
         <main>
             <section>
-                <article>
+                <article id="login-article">
                     <form id="login-form">
                         <label for="username">Username</label>
                         <input type="text" id="username" name="username" autocomplete="on" required>
                         <label for="passwd">Password</label>
                         <input type="password" id="passwd" name="passwd" autocomplete="on" required>
-                        <input type="submit" value="Login" id="login">
+                        <input type="submit" value="Sign In" id="login">
+                        <button id="create-button">Create an account</button>
+                    </form>
+                </article>
+            </section>
+            <div id="overlay"></div>
+            <section id="account-creation">
+                <h3>Create an account</h3>
+                <article id="create-article">
+                    <form id="create-form">
+                        <label for="create-username">Create username</label>
+                        <input type="text" id="create-username" name="username" autocomplete="on" required>
+                        <label for="create-passwd">Create password</label>
+                        <input type="password" id="create-passwd" name="passwd" autocomplete="on" required>
+                        <label for="create-passwd-confirm">Confirm Password</label>
+                        <input type="password" id="create-passwd-confirm" name="passwd-confirm" autocomplete="on" required>
+                        <input type="submit" value="Sign Up" id="create">
                     </form>
                 </article>
             </section>

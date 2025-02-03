@@ -6,6 +6,7 @@ html {
 
 body {
     margin: 0;
+    overflow: hidden;
 }
 
 header {
@@ -34,7 +35,7 @@ section {
     box-shadow: 0 0 4px black;
 }
 
-article {
+#login-article {
     width: 50%;
     padding: 2rem 0 2rem;
     margin: auto auto 3rem;
@@ -64,19 +65,28 @@ input {
     outline: none;
 }
 
-#username, #passwd {
+#username,
+#passwd,
+#create-username,
+#create-passwd,
+#create-passwd-confirm {
     line-height: 1.5rem;
     background-color: #3c444d;
     transition: 0.3s;
     color: white;
 }
 
-#username:focus, #passwd:focus {
+#username:focus,
+#passwd:focus,
+#create-username:focus,
+#create-passwd:focus,
+#create-passwd-confirm:focus {
     border-color: white;
     box-shadow: 0 0 4px black;
 }
 
-#login {
+#login,
+#create {
     margin: auto;
     outline: none;
     width: 40%;
@@ -90,8 +100,96 @@ input {
     transition: 0.2s;
 }
 
-#login:hover {
+#login:hover,
+#create:hover{
     background-color: #373b40;
     color: white;
     text-shadow: 0 0 2px white;
+}
+
+#create-button {
+    border-color: transparent;
+    margin: 12px auto 0;
+    width: 60%;
+    background-color: transparent;
+    color: darkblue;
+    font-family: "Barlow", sans-serif;
+}
+
+#create-button:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+#account-creation {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 50%;
+    background-color: #735637;
+    padding: 0;
+    width: 20%;
+    margin: auto;
+    display: none;
+    flex-direction: column;
+    animation: none;
+}
+
+#create-article {
+    width: 80%;
+    margin: 1rem auto;
+    padding: 1rem 0 1rem;
+    background-color: #FFF7D1;
+    border: solid black 1px;
+    border-radius: 1rem;
+    box-shadow: 0 0 4px black;
+}
+
+#create-form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 80%;
+}
+
+#overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    animation: none;
+    display: none;
+}
+
+#account-creation h3 {
+    color: white;
+    font-family: "Poiret One", sans-serif;
+    text-align: center;
+    font-size: 1.5rem;
+    text-shadow: 0 0 1px white;
+    margin-bottom: 0;
+}
+
+@keyframes adjust-brightness {
+    0% {
+        background-color: rgba(0, 0, 0, 0);
+    }
+    100% {
+        background-color: rgba(0, 0, 0, 0.85);
+    }
+}
+
+@keyframes pop-out {
+    0% {
+        transform: translateY(150%);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }

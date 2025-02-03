@@ -21,3 +21,32 @@ loginForm.addEventListener('submit', async function login(event){
       console.log(error);
   }
 });
+
+
+const createButton = document.querySelector('#create-button');
+createButton.addEventListener('click', function create(event){
+  event.preventDefault();
+  const creationWindow = document.querySelector('#account-creation');
+  creationWindow.style.display = 'flex';
+  if (creationWindow.style.display === 'flex') {
+    creationWindow.style.animation = 'pop-out 1s ease forwards';
+  }
+  const overlay = document.querySelector('#overlay');
+  overlay.style.display = 'block';
+  overlay.style.animation = 'adjust-brightness 0.8s ease-out forwards';
+  overlay.addEventListener('animationend', function listener() {
+    overlay.addEventListener('click', clickOut);
+  });
+});
+
+function clickOut() {
+  try {
+    const overlay = document.querySelector('#overlay');
+    overlay.style.animationDirection = 'reverse';
+    overlay.style.display = 'none';
+    const creationWindow = document.querySelector('#account-creation');
+    creationWindow.style.display = 'none';
+  } catch (error) {
+    console.log(error);
+  }
+}
