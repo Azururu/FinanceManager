@@ -66,11 +66,11 @@ dragElement(plannerDiv);
 dragElement(updateDiv);
 dragElement(balanceDiv);
 
+const gridSize = 15;
 
 function dragElement(elmnt) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     elmnt.onmousedown = dragMouseDown;
-    elmnt.ontouchstart = dragMouseDown;
 
     function dragMouseDown(e) {
         if (e.target.tagName === 'INPUT') {
@@ -82,7 +82,6 @@ function dragElement(elmnt) {
         pos4 = e.clientY;
         document.onmouseup = closeDragElement;
         document.onmousemove = elementDrag;
-        document.ontouchmove = elementDrag;
     }
 
     function elementDrag(e) {
@@ -121,6 +120,33 @@ function dragElement(elmnt) {
     function closeDragElement() {
         document.onmouseup = null;
         document.onmousemove = null;
+
+        let newTop = elmnt.offsetTop;
+        let newLeft = elmnt.offsetLeft;
+
+        newTop = Math.round(newTop / gridSize) * gridSize;
+        newLeft = Math.round(newLeft / gridSize) * gridSize;
+
+        const container = document.querySelector('.desktop-container');
+        const containerRect = container.getBoundingClientRect();
+        const elmntRect = elmnt.getBoundingClientRect();
+
+        if (newTop < containerRect.top) {
+            newTop = containerRect.top;
+        } else if (newTop + elmntRect.height > containerRect.bottom) {
+            newTop = containerRect.bottom - elmntRect.height;
+        }
+
+        if (newLeft < containerRect.left) {
+            newLeft = containerRect.left;
+        } else if (newLeft + elmntRect.width > containerRect.right) {
+            newLeft = containerRect.right - elmntRect.width;
+        }
+
+        requestAnimationFrame(() => {
+            elmnt.style.top = newTop + "px";
+            elmnt.style.left = newLeft + "px";
+        });
     }
 
 

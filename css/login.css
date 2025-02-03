@@ -193,3 +193,12 @@ input {
         transform: translateY(0);
     }
 }
+
+@keyframes disappear {
+    0% {
+        opacity: 100%;
+    }
+    100% {
+        opacity: 0;
+    }
+}

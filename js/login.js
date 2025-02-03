@@ -14,14 +14,13 @@ loginForm.addEventListener('submit', async function login(event){
     const jsonData = await response.json();
     console.log(jsonData);
 
-    if (response === "valid") {
+    if (jsonData === "result: successful") {
       window.location.replace('/html/page.html')
     }
   } catch (error) {
       console.log(error);
   }
 });
-
 
 const createButton = document.querySelector('#create-button');
 createButton.addEventListener('click', function create(event){
@@ -35,18 +34,23 @@ createButton.addEventListener('click', function create(event){
   overlay.style.display = 'block';
   overlay.style.animation = 'adjust-brightness 0.8s ease-out forwards';
   overlay.addEventListener('animationend', function listener() {
+    overlay.style.animationPlayState = 'paused';
     overlay.addEventListener('click', clickOut);
+    overlay.removeEventListener('animationend', listener);
   });
 });
 
 function clickOut() {
   try {
     const overlay = document.querySelector('#overlay');
-    overlay.style.animationDirection = 'reverse';
-    overlay.style.display = 'none';
+    overlay.style.animation = 'adjust-brightness 0.8s ease-out backwards';
     const creationWindow = document.querySelector('#account-creation');
-    creationWindow.style.display = 'none';
-  } catch (error) {
+    creationWindow.style.animation = 'pop-in 1s ease reverse';
+    creationWindow.addEventListener('animationend', function hideForm() {
+      creationWindow.style.display = 'none';
+      creationWindow.removeEventListener('animationend', hideForm);
+    });
+  }catch (error) {
     console.log(error);
   }
 }
