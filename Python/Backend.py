@@ -63,21 +63,36 @@ def update(update_value, date):
 def login(username, password):
     cursor = connection.cursor()
     try:
-        sql_search = "SELECT * FROM account WHERE user = {%s};"
-        sql_full_auth = "SELECT * FROM account WHERE user = {%s} AND password = {%s};"
-        sql_insert = "INSERT INTO account (user, password) VALUES (%s, %s);"
+        sql_search = "SELECT * FROM account WHERE user = %s;"
+        sql_full_auth = "SELECT * FROM account WHERE user = %s AND password = %s;"
         cursor.execute(sql_search, username)
-        result = cursor.fetchall()
-        if result:
+        username_result = cursor.fetchone()
+        if username_result:
             cursor.execute(sql_full_auth, (username, password))
-            check = cursor.fetchall()
-            if check:
+            check_result = cursor.fetchall()
+            if check_result:
                 return {"result": "successful"}
             else:
                 return {"result": "failed"}
-        if not result:
+        else:
+            return {"result": "failed"}
+    finally:
+        cursor.close()
+
+@app.route('/register/<username>/<password>/<password_conf>' , methods=['GET'])
+def register(username, password, password_conf):
+    cursor = connection.cursor()
+    try:
+        if password == password_conf:
+            sql_insert = "INSERT INTO account (user, password) VALUES (%s, %s);"
             cursor.execute(sql_insert, (username, password))
-            return {"valid": "created"}
+            result = cursor.fetchall()
+            if result:
+                return {"result": "successful"}
+            else:
+                return {"result": "failed"}
+        else:
+            return {"result": "failed"}
     finally:
         cursor.close()
 
